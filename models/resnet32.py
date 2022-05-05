@@ -152,16 +152,16 @@ class CifarResNet(nn.Module):
     x = self.conv_1_3x3(x)
     x1 = F.relu(self.bn_1(x), inplace=True)
     x2 = self.stage_1(x1)
-    if (f != None):
-      x2 = f
-    x3 = self.stage_2(x2)
 
+    x3 = self.stage_2(x2)
+    if (f != None):
+      x3 = f
     x4 = self.stage_3(x3)
 
     x5 = self.avgpool(x4)
     x = x5.view(x5.size(0), -1)
     # return self.linear(x), [x1, x2, x3, x]
-    return self.linear(x), x2
+    return self.linear(x), x3
 
 
 
